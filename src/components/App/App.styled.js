@@ -3,27 +3,26 @@ import styled from '@emotion/styled'
 export const AppContainer = styled.div`
     display:flex;
     flex-direction:column;
-    margin-left:30px;
+    margin-left:${p => p.theme.space[5]}px;
     height: 100vh;
     justify-content: center;
-    align-items:center;
-    color:#010101;
+    align-items:center; 
 `
 
 export const PageTitle = styled.h1`
-  margin-bottom: 10px;
+  margin-bottom: ${p => p.theme.space[5]}px;
   
-  font-size: 40px;
-  font-weight: 700;
+  font-size: ${p => p.theme.fontSizes.xl};
+  font-weight: ${p => p.theme.fontWeights.bold};
   text-align: center;
-  color: #010101;
+  color: ${p => p.theme.colors.titleColor};
 `
 
 export const Title = styled.h2`
-  margin-bottom: 5 px;
+  margin-bottom: ${p => p.theme.space[5]}px;
   
-  font-size: 35px;
-  font-weight: 700;
+  font-size: ${p => p.theme.fontSizes.m};
+  font-weight: ${p => p.theme.fontWeights.bold};
   text-align: center;
-  color: #010101;
+  color: ${p => p.theme.colors.titleColor};
 `

@@ -6,21 +6,28 @@ export const ContactItem = styled.li`
   justify-content: space-between;
   -webkit-box-align: center;
   align-items: center;
-  font-size: 22px;
+  font-size: ${p => p.theme.fontSizes.l};
 `;
 export const Info = styled.p`
-  padding: 2px;
-  font-size: 20px;
+  padding: ${p => p.theme.space[3]}px;
+  font-size: ${p => p.theme.fontSizes.s};
+  font-weight: ${p => p.theme.fontWeights.bold};
+  color: ${p => p.theme.colors.text};
 `;
 
 export const DeleteBtn = styled.button`
-  margin-left: 8px;
-  padding: 8px;
-  font-size: 14px;
-  color: #010101;
-  /* background-color: white; */
-  border-color: #000000;
+  margin-left: ${p => p.theme.space[3]}px;
+  padding: ${p => p.theme.space[3]}px;
+  font-size: ${p => p.theme.fontSizes.xs};
 
-  /* border: none; */
-  outline: none;
+  color: ${p => p.theme.colors.btnColorText};
+  background-color: ${p => p.theme.colors.btnBgc};
+  border-radius: ${p => p.theme.radii.sm};
+  border: none;
+  :hover {
+    background-color: ${p => p.theme.colors.btnBgcAccent};
+  }
+  :focus {
+    box-shadow: ${p => p.theme.shadows.normal};
+  }
 `;

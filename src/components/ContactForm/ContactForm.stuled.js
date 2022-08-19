@@ -3,30 +3,58 @@ import styled from '@emotion/styled';
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 400px;
-  border: 1px solid black;
-  padding: 20px;
+  min-width: 400px;
+
+  padding: ${p => p.theme.space[4]}px;
+  margin-bottom: ${p => p.theme.space[5]}px;
+
+  border: ${p => p.theme.borders.easy};
+  border-radius: ${p => p.theme.radii.md};
 `;
 
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
-  font-size: 22px;
-  margin-bottom: 10px;
+
+  margin-bottom: ${p => p.theme.space[4]}px;
+
+  font-size: ${p => p.theme.fontSizes.m};
+  font-weight: ${p => p.theme.fontWeights.bold};
+  color: ${p => p.theme.colors.text};
+
 `;
 
 export const Input = styled.input`
-  height: 20px;
-  font-size: 18px;
-  padding: 3px;
-  margin-top: 10px;
+  min-height: 30px;
+  padding: ${p => p.theme.space[2]}px;
+  margin-top: ${p => p.theme.space[3]}px;
+
+  text-align: center;
+  font-size: ${p => p.theme.fontSizes.s};
+
+  border: none;
+  outline: none;
+  border-radius: ${p => p.theme.radii.sm};
+  :focus {
+    box-shadow: ${p => p.theme.shadows.normal};
+  }
 `;
 
 export const SubmitBtn = styled.button`
-  padding: 12px;
-  font-weight: 700;
-  color: #010101;
-  background-color: white;
+  min-height: 40px;
+  padding: ${p => p.theme.space[2]}px;
 
-  outline: none;
+  font-weight: ${p => p.theme.fontWeights.bold};
+  font-size: ${p => p.theme.fontSizes.s};
+  color: ${p => p.theme.colors.btnColorText};
+  background-color: ${p => p.theme.colors.btnBgc};
+
+  border-radius: ${p => p.theme.radii.sm};
+  border: none;
+  :hover {
+    background-color: ${p => p.theme.colors.btnBgcAccent};
+  }
+  :focus {
+    box-shadow: ${p => p.theme.shadows.normal};
+  }
 `;

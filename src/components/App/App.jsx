@@ -22,7 +22,7 @@ export class App extends Component {
 
   handleAddContact = contact => {
     if (this.state.contacts.some(cont => cont.name === contact.name)) {
-      alert('contact already exist');
+      alert(`${contact.name} is already in contacts`);
       return;
     }
     this.setState(prev => ({

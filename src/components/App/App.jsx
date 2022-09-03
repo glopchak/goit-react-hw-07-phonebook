@@ -20,6 +20,19 @@ export class App extends Component {
     filter: '',
   };
 
+componentDidUpdate(prevProps, prevState){
+  localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+  if(this.state.contacts.length !== prevState.contacts.length){
+    this.setState( { contacts : JSON.parse(localStorage.getItem('contacts'))}) 
+  }
+}
+
+componentDidMount(){
+  if(localStorage.getItem('contacts')){
+    this.setState( { contacts : JSON.parse(localStorage.getItem('contacts'))}) 
+  }
+}
+
   handleAddContact = contact => {
     if (this.state.contacts.some(cont => cont.name === contact.name)) {
       alert(`${contact.name} is already in contacts`);
@@ -41,6 +54,7 @@ export class App extends Component {
   };
 
   render() {
+    
     const filteredContacts = filterContacts(
       this.state.contacts,
       this.state.filter

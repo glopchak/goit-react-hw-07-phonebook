@@ -10,7 +10,6 @@ export function Filter({ handleSetFilterValue }) {
   );
 }
 
-
 Filter.propTypes = {
-    handleSetFilterValue: PropTypes.func.isRequired,
-  };
+  handleSetFilterValue: PropTypes.func.isRequired,
+};

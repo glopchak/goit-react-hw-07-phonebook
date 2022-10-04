@@ -1,7 +1,17 @@
 import { Label, Input, FilterContainer } from './Filter.styled';
 import PropTypes from 'prop-types';
+import { filterContact } from 'redux/filterSlice';
+import { useDispatch } from 'react-redux';
 
-export function Filter({ handleSetFilterValue }) {
+
+
+export function Filter() {
+  const dispatch = useDispatch();
+
+  const handleSetFilterValue = ({ target: { value } }) => {
+     dispatch(filterContact(value));
+  };
+
   return (
     <FilterContainer>
       <Label>Find Contacts by name</Label>
@@ -11,5 +21,5 @@ export function Filter({ handleSetFilterValue }) {
 }
 
 Filter.propTypes = {
-  handleSetFilterValue: PropTypes.func.isRequired,
+  handleSetFilterValue: PropTypes.func,
 };

@@ -1,79 +1,84 @@
-import { useState, useEffect } from 'react';
-import { nanoid } from 'nanoid';
+import {  useEffect } from 'react';
+// import { nanoid } from 'nanoid';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
 import { AppContainer, PageTitle, Title } from './App.styled';
 
 
-const initValue = () => {
-  const contactsLocalStorage = localStorage.getItem('contacts');
-  if (
-    contactsLocalStorage === '' ||
-    JSON.parse(contactsLocalStorage).length === 0
-  ) {
-    return [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ];
-  }
-  return JSON.parse(contactsLocalStorage);
-};
+import { useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
+
+// const initValue = () => {
+//   const contactsLocalStorage = localStorage.getItem('contacts');
+//   if (
+//     contactsLocalStorage === '' ||
+//     JSON.parse(contactsLocalStorage).length === 0
+//   ) {
+//     return [
+//       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+//       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+//       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+//       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+//     ];
+//   }
+//   return JSON.parse(contactsLocalStorage);
+// };
+
+
 
 export function App() {
-  const [contacts, setContacts] = useState(initValue);
-  const [filter, setFilter] = useState('');
-  const filteredContacts = filterContacts();
+  const contacts = useSelector(getContacts);
 
   useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
+    window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
+// export function App() {
+//   const [contacts, setContacts] = useState(initValue);
+//   const [filter, setFilter] = useState('');
+//   const filteredContacts = filterContacts();
 
-  function changeFilterHandler(e) {
-    const {
-      target: { value },
-    } = e;
-    setFilter(value);
-  }
+//   useEffect(() => {
+//     localStorage.setItem('contacts', JSON.stringify(contacts));
+//   }, [contacts]);
 
-  function submitHandler(name, number) {
-    if (contacts.some(contact => contact.name.includes(name))) {
-      alert(`${name} is already in contacts`);
-      return;
-    }
+//   function changeFilterHandler(e) {
+//     const {
+//       target: { value },
+//     } = e;
+//     setFilter(value);
+//   }
 
-    setContacts(prevContacts => [
-      { id: nanoid(), name, number },
-      ...prevContacts,
-    ]);
-  }
+//   function submitHandler(name, number) {
+//     if (contacts.some(contact => contact.name.includes(name))) {
+//       alert(`${name} is already in contacts`);
+//       return;
+//     }
 
-  function filterContacts() {
-    const filterValue = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLocaleLowerCase().includes(filterValue)
-    );
-  }
+//     setContacts(prevContacts => [
+//       { id: nanoid(), name, number },
+//       ...prevContacts,
+//     ]);
+//   }
 
-  function deleteBtnHandler(id) {
-    setContacts(contacts.filter(contact => contact.id !==  id));
-  }
+//   function filterContacts() {
+//     const filterValue = filter.toLowerCase();
+//     return contacts.filter(contact =>
+//       contact.name.toLocaleLowerCase().includes(filterValue)
+//     );
+//   }
+
+//   function deleteBtnHandler(id) {
+//     setContacts(contacts.filter(contact => contact.id !==  id));
+//   }
 
   return (
     <AppContainer>
       <PageTitle>Phonebook</PageTitle>
-      <ContactForm onAddContact={submitHandler} />
+      <ContactForm />
       <Title>Contacts</Title>
-      <Filter
-        value={filter}
-        handleSetFilterValue={changeFilterHandler}
-      />
-      <ContactList
-        contacts={filteredContacts}
-        handleDeleteContact={deleteBtnHandler}
-      />
+      <Filter />
+      <ContactList />
     </AppContainer>
   );
 }

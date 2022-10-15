@@ -1,15 +1,13 @@
 import { Label, Input, FilterContainer } from './Filter.styled';
 import PropTypes from 'prop-types';
-import { filterContact } from 'redux/filterSlice';
+import { updateFilter } from 'redux/contactsSlice';
 import { useDispatch } from 'react-redux';
-
-
 
 export function Filter() {
   const dispatch = useDispatch();
 
   const handleSetFilterValue = ({ target: { value } }) => {
-     dispatch(filterContact(value));
+    dispatch(updateFilter(value));
   };
 
   return (

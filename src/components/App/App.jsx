@@ -1,76 +1,21 @@
-import {  useEffect } from 'react';
-// import { nanoid } from 'nanoid';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getError, getIsLoading } from 'redux/selectors';
+import { fetchContacts } from 'redux/operations';
+
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
 import { AppContainer, PageTitle, Title } from './App.styled';
 
-
-import { useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
-
-// const initValue = () => {
-//   const contactsLocalStorage = localStorage.getItem('contacts');
-//   if (
-//     contactsLocalStorage === '' ||
-//     JSON.parse(contactsLocalStorage).length === 0
-//   ) {
-//     return [
-//       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-//       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-//       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-//       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-//     ];
-//   }
-//   return JSON.parse(contactsLocalStorage);
-// };
-
-
-
 export function App() {
-  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
+  const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
 
   useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
-// export function App() {
-//   const [contacts, setContacts] = useState(initValue);
-//   const [filter, setFilter] = useState('');
-//   const filteredContacts = filterContacts();
-
-//   useEffect(() => {
-//     localStorage.setItem('contacts', JSON.stringify(contacts));
-//   }, [contacts]);
-
-//   function changeFilterHandler(e) {
-//     const {
-//       target: { value },
-//     } = e;
-//     setFilter(value);
-//   }
-
-//   function submitHandler(name, number) {
-//     if (contacts.some(contact => contact.name.includes(name))) {
-//       alert(`${name} is already in contacts`);
-//       return;
-//     }
-
-//     setContacts(prevContacts => [
-//       { id: nanoid(), name, number },
-//       ...prevContacts,
-//     ]);
-//   }
-
-//   function filterContacts() {
-//     const filterValue = filter.toLowerCase();
-//     return contacts.filter(contact =>
-//       contact.name.toLocaleLowerCase().includes(filterValue)
-//     );
-//   }
-
-//   function deleteBtnHandler(id) {
-//     setContacts(contacts.filter(contact => contact.id !==  id));
-//   }
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <AppContainer>
@@ -78,6 +23,7 @@ export function App() {
       <ContactForm />
       <Title>Contacts</Title>
       <Filter />
+      {isLoading && !error && <b>Request in progress...</b>}
       <ContactList />
     </AppContainer>
   );

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
 import { getContacts } from 'redux/selectors';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 
 import { Form, Label, Input, SubmitBtn} from './ContactForm.stuled';
 
@@ -19,16 +19,6 @@ const handleChangeInput = event => {
   event.currentTarget.name === 'name' ? setName(value) : setNumber(value);
 };
   
-// const handleSubmit = event => {
-//   event.preventDefault();
-//   onAddContact(name, number);
-//   reset();
-// };
-
-// const  reset = () => {
-//   setName('');
-//   setNumber('');
-// }
 
 const handleSubmit = e => {
   e.preventDefault();
@@ -45,7 +35,6 @@ const handleSubmit = e => {
   const contact = {
     name,
     number,
-    id: nanoid(),
   };
 
   dispatch(addContact(contact));

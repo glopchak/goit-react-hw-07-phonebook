@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/goit-react-hw-06-phonebook/static/js/main.d75417a2.js",
+    "main.js": "/goit-react-hw-06-phonebook/static/js/main.b2e2a43c.js",
     "index.html": "/goit-react-hw-06-phonebook/index.html",
-    "main.d75417a2.js.map": "/goit-react-hw-06-phonebook/static/js/main.d75417a2.js.map"
+    "main.b2e2a43c.js.map": "/goit-react-hw-06-phonebook/static/js/main.b2e2a43c.js.map"
   },
   "entrypoints": [
-    "static/js/main.d75417a2.js"
+    "static/js/main.b2e2a43c.js"
   ]
 }
